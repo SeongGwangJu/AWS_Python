@@ -30,7 +30,7 @@ def sub(**data):
     print(data)
 
 
-# sub(a=1, b=2)
+# sub(a=1, b=2)-
 # sub({"a": 1, "b": 2})
 
 

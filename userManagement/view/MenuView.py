@@ -17,8 +17,8 @@ class MenuView:
         elif select == "2":
             pass
         elif select == "3":
-            from userManagement.view.RegisterUserView import RegisterUserView
-            RegisterUserView.register()
+            from userManagement.view.UserView import UserView
+            UserView.register()
         elif select == "4":
             pass
         elif select == "5":

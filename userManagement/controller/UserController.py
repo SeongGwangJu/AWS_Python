@@ -7,3 +7,4 @@ class UserController:
         #bool : boolean타입으로 형변환
         responseBody = bool(UserRepository.saveUser(user))
         return ResponseEntity(body=responseBody)
+

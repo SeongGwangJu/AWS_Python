@@ -1,4 +1,4 @@
-class RegisterUserView:
+class UserView:
 
     @staticmethod #싱글톤 대신
     def register():
@@ -17,5 +17,8 @@ class RegisterUserView:
             email=email
         ))
 
-        print(response.__dict__)
+        #
+        if not response.__dict__.get("body"):
+            print("데이터를 추가하는 중 오류가 발생하였습니다")
+            print("다시 시도해주세요.")
 

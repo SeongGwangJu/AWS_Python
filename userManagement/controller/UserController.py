@@ -20,5 +20,10 @@ class UserController:
         responseBody = bool(UserRepository.saveUser(user))
         return ResponseEntity(body=responseBody)
 
+    @staticmethod
+    def updateUser(user=None):
+        responseBody = UserRepository.updateUser(user)
+        return ResponseEntity(body=responseBody)
+
 
 

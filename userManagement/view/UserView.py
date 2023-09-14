@@ -49,14 +49,20 @@ class UserView:
             print("수정 할 사용자 정보가 없습니다.")
             return
         df = pd.DataFrame(response.body)
+        print(df)
         userId = input("수정하실 userId를 입력하세요 >>>")
         # df.index 안에는 내가 찾고자 하는 조건.
         # df["userId"] userId 컬럼 중, 입력받은 userId와 같은 데이터
         # values[0] : 어차피 userId가 같은건 하나니까 첫번째 데이터
         index = df.index[df["userId"] == int(userId)].values[0]
-        print(df.iloc[index])
-        #
-        UserView.showUpdateMenu(response.body[index])
+        user = UserView.showUpdateMenu(response.body[index])
+        if not bool(user):
+            print("수정을 취소하였습니다.")
+            return
+
+        response = UserController.updateUser(user)
+        if(bool(response.body)):
+            print("===============<< 수정 완료 >>===============")
 
     @staticmethod
     def showUpdateMenu(oldUser):
@@ -68,6 +74,7 @@ class UserView:
         while True:
             print("-" * 50)
             df = pd.DataFrame([oldUser, newUser], index=["수정 전", "수정 후"])
+            print(pd.DataFrame([oldUser, newUser], index=["수정 전", "수정 후"]))
             print("-" * 50)
             print("1. password 수정 ")
             print("2. name 수정 ")
@@ -93,6 +100,7 @@ class UserView:
                     continue
 
                 newUser["password"] = password
+
             elif select == "2":
                 name = input("이름 입력 >>> ")
 

@@ -83,14 +83,38 @@ class UserRepository:
             print(e)
             return 0
 
+    @staticmethod
+    def updateUser(user=None):
+        try:
+            connection = DataBaseConfig.getConnection()
+            cursor = connection.cursor(pymysql.cursors.DictCursor)
+
+            sql = """
+            update user_tb
+            set
+                password = %s,
+                name = %s,
+                email = %s
+            where
+                user_id = %s
+            """
+
+            # execute는 int, 성공횟수를 return함
+            updateCount = cursor.execute(sql,
+                        (user.get("password"), user.get("name"), user.get("email"), user.get("userId")))
+            connection.commit()  # insert 마무리
+            return updateCount
+        except Exception as e:  # catch 대신 except.
+            print(e)
+            return 0
 
 
-if __name__ == "__main__":
-    userList = UserRepository.getUsersAll()
-    print(userList)
-
-    # 출력해보면 pandas가 깔끔하게 표 형식으로 정리해줌. *pandas as pd로 정의됨
-    # dataFrame은 list나 tuple만 가능.
-    df = pd.DataFrame(userList)
-    print(df)
-    # print(df.get("username"))
+# if __name__ == "__main__":
+#     userList = UserRepository.getUsersAll()
+#     print(userList)
+#
+#     # 출력해보면 pandas가 깔끔하게 표 형식으로 정리해줌. *pandas as pd로 정의됨
+#     # dataFrame은 list나 tuple만 가능.
+#     df = pd.DataFrame(userList)
+#     print(df)
+#     # print(df.get("username"))

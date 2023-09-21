@@ -32,7 +32,6 @@ print(npDoubleArray1 + npDoubleArray2)
 
 #shape : 행렬의 크기를 알려줌 n행m열
 print("npArray1.shape")
-print(npArray1.shape)
 print("npDoubleArray1.shape")
 print(npDoubleArray1.shape)
 
